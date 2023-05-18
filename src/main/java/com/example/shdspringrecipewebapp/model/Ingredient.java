@@ -20,6 +20,15 @@ public class Ingredient {
     //@JoinColumn(name = "recipe_id", nullable = false)
     private Recipe recipe;
 
+    public Ingredient() {
+    }
+
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
+        this.description = description;
+        this.amount = amount;
+        this.uom = uom;
+    }
+
     public Long getId() {
         return id;
     }
