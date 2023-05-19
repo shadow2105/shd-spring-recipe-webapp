@@ -30,7 +30,7 @@ public class Recipe {
     @Lob
     private Byte[] image;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Notes notes;
 
     @ManyToMany
