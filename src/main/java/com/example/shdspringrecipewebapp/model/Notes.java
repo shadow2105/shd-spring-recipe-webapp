@@ -1,7 +1,10 @@
 package com.example.shdspringrecipewebapp.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
+@Data
+//@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Notes {
     @Id
@@ -11,30 +14,9 @@ public class Notes {
     @Lob
     private String notes;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @OneToOne(fetch = FetchType.LAZY)
     private Recipe recipe;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
 }

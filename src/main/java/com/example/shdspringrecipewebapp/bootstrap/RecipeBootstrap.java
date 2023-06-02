@@ -4,6 +4,8 @@ import com.example.shdspringrecipewebapp.model.*;
 import com.example.shdspringrecipewebapp.repositories.CategoryRepository;
 import com.example.shdspringrecipewebapp.repositories.RecipeRepository;
 import com.example.shdspringrecipewebapp.repositories.UnitOfMeasureRepository;
+import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -12,6 +14,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
     private final CategoryRepository categoryRepository;
@@ -24,8 +27,11 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         this.unitOfMeasureRepository = unitOfMeasureRepository;
     }
 
+    @Transactional
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
+        log.debug(":Loading Bootstrap Data");
+
         recipeRepository.saveAll(getRecipes());
     }
 
@@ -133,7 +139,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         chickenTaco.addIngredient(new Ingredient("Clove of Garlic, Chopped", new BigDecimal(1), each));
         chickenTaco.addIngredient(new Ingredient("finely grated orange zest", new BigDecimal(1), tablespoon));
         chickenTaco.addIngredient(new Ingredient("fresh-squeezed orange juice", new BigDecimal(3), tablespoon));
-        chickenTaco.addIngredient(new Ingredient("Olive Oil", new BigDecimal(2), tablespoon, chickenTaco));
+        chickenTaco.addIngredient(new Ingredient("Olive Oil", new BigDecimal(2), tablespoon));
         chickenTaco.addIngredient(new Ingredient("boneless chicken thighs", new BigDecimal(4), tablespoon));
         chickenTaco.addIngredient(new Ingredient("small corn tortillas", new BigDecimal(8), each));
         chickenTaco.addIngredient(new Ingredient("packed baby arugula", new BigDecimal(3), cup));
